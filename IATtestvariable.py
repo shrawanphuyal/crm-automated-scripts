@@ -1,9 +1,13 @@
-#superadmin_creds
-superadmin={
-    'email': 'satkar@gensesolution.com',
+# update variables  according to server
+server_url = 'http://3.89.232.237:8001/'
+
+# superadmin_creds
+superadmin = {
+    'email': 'satkarph@gmail.com',
     'password': 'nepal1234'
 }
 
+# user details
 newusr = {
     'email': 'apitesting@pokemail.net',
     'fname': 'Api',
