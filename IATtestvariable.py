@@ -1,5 +1,5 @@
 # update variables  according to server
-server_url = 'http://3.89.232.237:8001/'
+server_url = 'http://3.89.232.237:8001'
 
 # superadmin_creds
 superadmin = {
@@ -12,7 +12,7 @@ newusr = {
     'email': 'apitesting@pokemail.net',
     'fname': 'Api',
     'lname': 'Testing',
-    'password': 'Password#123',
+    'password': 'Password+123',
     'role': '3',
     'newpass': 'Password+123'
 }

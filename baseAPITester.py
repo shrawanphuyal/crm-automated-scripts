@@ -12,7 +12,6 @@ def login(user_details):
         'password': user_details['password']
     }
     login = requests.post(login_url, data)
-    print(login.text)
     access = json.loads(login.text)['access']
     user_details['access'] = access
     return user_details
@@ -21,7 +20,7 @@ def login(user_details):
 def passchange(user_details):
     passchange_url = IATtestvariable.server_url + '/api/accounts/password/change/'
     headers = {
-        'Authorization': 'Beareer ' + user_details['token']
+        'Authorization': 'Bearer ' + user_details['access']
     }
     data = {
         'password': user_details['newpass']
@@ -34,7 +33,7 @@ def passchange(user_details):
 def userdetails(user_details):
     userdetails_url = IATtestvariable.server_url + '/api/accounts/users-me/'
     headers = {
-        'Authorization': 'Beareer ' + user_details['token']
+        'Authorization': 'Bearer ' + user_details['access']
     }
     userdetails = requests.get(url=userdetails_url, headers=headers)
     print(userdetails.text)
@@ -44,7 +43,7 @@ def userdetails(user_details):
 def otheruserdetails(user_details):
     otheruserdetails_url = IATtestvariable.server_url + '/api/accounts/users/'
     headers = {
-        'Authorization': 'Beareer ' + user_details['token']
+        'Authorization': 'Bearer ' + user_details['access']
     }
     otheruserdetails = requests.get(url=otheruserdetails_url, headers=headers)
     print(otheruserdetails.text)
@@ -54,7 +53,7 @@ def otheruserdetails(user_details):
 def updateuser(user_details):
     updateuser_url = IATtestvariable.server_url + '/api/accounts/users/{0}/'
     headers = {
-        'Authorization': 'Beareer ' + user_details['token']
+        'Authorization': 'Bearer ' + user_details['access']
     }
     data = {
         'email': user_details['uemail'],
@@ -71,7 +70,7 @@ def updateuser(user_details):
 def deactivateuser(user_details):
     deactivateuser_url = IATtestvariable.server_url + '/api/accounts/users/{0}/'
     headers = {
-        'Authorization': 'Beareer ' + user_details['token']
+        'Authorization': 'Bearer ' + user_details['access']
     }
     data = {
         'is_active': 'False'
@@ -84,7 +83,7 @@ def deactivateuser(user_details):
 def createuser(user_details):
     createuser_url = IATtestvariable.server_url + '/api/accounts/createuser/'
     headers = {
-        'Authorization': 'Beareer ' + user_details['token']
+        'Authorization': 'Bearer ' + user_details['access']
     }
     data = {
         'email': user_details['uemail'],
@@ -94,6 +93,7 @@ def createuser(user_details):
         'role': user_details['role']
     }
     createuser = requests.post(url=createuser_url, data=data, headers=headers)
+    print(createuser.text)
     user_details['userid'] = json.loads(createuser.text)['id']
     print(createuser.text)
     return user_details
