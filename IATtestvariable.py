@@ -16,3 +16,18 @@ newusr = {
     'role': '3',
     'newpass': 'Password+123'
 }
+
+order = {
+    'id': '122'
+}
+
+Audit_trail = {
+    'to': order['to'],
+    'from': '',
+    'redemptionid': '',
+    'uuid': '',
+    'email': '',
+    'status': '',
+    'merchant': '',
+    'sort': ''
+}

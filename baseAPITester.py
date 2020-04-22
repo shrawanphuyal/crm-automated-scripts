@@ -97,3 +97,70 @@ def createuser(user_details):
     user_details['userid'] = json.loads(createuser.text)['id']
     print(createuser.text)
     return user_details
+
+
+def audittrail(user_details):
+    audittrail_url = IATtestvariable.server_url + '/autittrail'
+    headers = {
+        'Authorization': 'Bearer ' + user_details['access']
+    }
+    audittrail = requests.get(url=audittrail_url, headers=headers)
+    print(audittrail.text)
+    return user_details
+
+
+def order(order):
+    order_url = IATtestvariable.server_url + '/orders/'
+    headers = {
+        'Authorization': 'Bearer ' + order['access']
+    }
+    data = {
+        'to': order['to'],
+        'from': order['from'],
+        'redemptionid': order['redemptionid'],
+        'uuid': order['uuid'],
+        'email': order['email'],
+        'status': order['status'],
+        'merchant': order['merchant'],
+        'sort': order['sort']
+    }
+    order = requests.post(url=order_url, data=data, headers=headers)
+    print(order.text)
+    return order
+
+
+def order_details(order):
+    order_details_url = IATtestvariable.server_url + '/order-detail/{0}/'
+    headers = {
+        'Authorization': 'Bearer ' + order['access']
+    }
+    order_details = requests.get(url=order_details_url.format(order['id']), headers=headers)
+    print(order_details.text)
+    return order
+
+
+def order_modify(order):
+    order_details_url = IATtestvariable.server_url + '/order-detail/{0}/'
+    headers = {
+        'Authorization': 'Bearer ' + order['access']
+    }
+    data = {
+        "locked": order['locked'],
+    }
+    order_details = requests.put(url=order_details_url.format(order['id']), data=data, headers=headers)
+    print(order_details.text)
+    return order
+
+
+def order_locked(order):
+    order_details_url = IATtestvariable.server_url + '/getorder/'
+    headers = {
+        'Authorization': 'Bearer ' + order['access']
+    }
+    data = {
+        'id': order['id']
+    }
+    order_details = requests.post(url=order_details_url, data=data, headers=headers)
+    print(order_details.text)
+    return order
+
