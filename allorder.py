@@ -1,4 +1,4 @@
-from baseAPITester import login, order
+from baseAPITester import login, allorder
 import IATtestvariable
 order = {}
 user_details = {}
@@ -7,4 +7,4 @@ if __name__ == '__main__':
     order['password'] = IATtestvariable.superadmin['password']
     login(order)
     user_details['access'] = order['access']
-    order(order)
+    allorder(order)

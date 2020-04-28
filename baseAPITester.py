@@ -100,7 +100,7 @@ def createuser(user_details):
 
 
 def audittrail(user_details):
-    audittrail_url = IATtestvariable.server_url + '/autittrail'
+    audittrail_url = IATtestvariable.server_url + '/audittrial/'
     headers = {
         'Authorization': 'Bearer ' + user_details['access']
     }
@@ -109,22 +109,12 @@ def audittrail(user_details):
     return user_details
 
 
-def order(order):
+def allorder(order):
     order_url = IATtestvariable.server_url + '/orders/'
     headers = {
         'Authorization': 'Bearer ' + order['access']
     }
-    data = {
-        'to': order['to'],
-        'from': order['from'],
-        'redemptionid': order['redemptionid'],
-        'uuid': order['uuid'],
-        'email': order['email'],
-        'status': order['status'],
-        'merchant': order['merchant'],
-        'sort': order['sort']
-    }
-    order = requests.post(url=order_url, data=data, headers=headers)
+    order = requests.get(url=order_url, headers=headers)
     print(order.text)
     return order
 
@@ -163,4 +153,6 @@ def order_locked(order):
     order_details = requests.post(url=order_details_url, data=data, headers=headers)
     print(order_details.text)
     return order
+
+
 
