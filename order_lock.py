@@ -1,10 +1,12 @@
 from baseAPITester import login, order_locked
 import IATtestvariable
-order = {}
-user_details = {}
+
+order = {
+    'email': IATtestvariable.superadmin['email'],
+    'password': IATtestvariable.superadmin['password'],
+    'id': IATtestvariable.order['id']
+}
+
 if __name__ == '__main__':
-    order['email'] = IATtestvariable.superadmin['email']
-    order['password'] = IATtestvariable.superadmin['password']
     login(order)
-    user_details['access'] = order['access']
     order_locked(order)

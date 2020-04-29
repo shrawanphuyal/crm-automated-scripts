@@ -1,12 +1,12 @@
-from baseAPITester import login, order_details
 import IATtestvariable
+from baseAPITester import upload_file, login
 
-order = {
+file = {
     'email': IATtestvariable.superadmin['email'],
     'password': IATtestvariable.superadmin['password'],
-    'id': IATtestvariable.order['id']
+    'file': IATtestvariable.file['name']
 }
 
 if __name__ == '__main__':
-    login(order)
-    order_details(order)
+    login(file)
+    upload_file(file)

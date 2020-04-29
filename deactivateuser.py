@@ -1,11 +1,12 @@
 from baseAPITester import login, deactivateuser
 import IATtestvariable
 
-user_details = {}
+user_details = {
+    'email': IATtestvariable.superadmin['email'],
+    'password': IATtestvariable.superadmin['password'],
+    'userid': '5'
+}
 
 if __name__ == '__main__':
-    user_details['email'] = IATtestvariable.superadmin['email']
-    user_details['password'] = IATtestvariable.superadmin['password']
     login(user_details)
-    user_details['userid'] = '5'
     deactivateuser(user_details)
