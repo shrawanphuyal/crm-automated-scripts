@@ -155,7 +155,7 @@ def order_locked(order):
 
 
 def margincal(margin):
-    margin_url = IATtestvariable.server_url + '/margincalculator/'
+    margin_url = IATtestvariable.server_url + '/margin-calculator/'
     headers = {
         'Authorization': 'Bearer ' + margin['access']
     }
