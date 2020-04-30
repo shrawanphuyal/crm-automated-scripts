@@ -1,7 +1,7 @@
 # update variables  according to server
 server_url = 'http://3.89.232.237:8001'
+import random
 import os
-
 # superadmin_creds
 superadmin = {
     'email': 'satkarph@gmail.com',
@@ -15,7 +15,8 @@ newusr = {
     'lname': 'Testing',
     'password': 'Password+123',
     'role': '3',
-    'newpass': 'Password+123'
+    'newpass': 'Password+123!',
+    'userid': '23'
 }
 
 # order details

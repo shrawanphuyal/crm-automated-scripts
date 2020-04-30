@@ -8,7 +8,8 @@ user_details = {
     'upassword': IATtestvariable.newusr['password'],
     'fname': IATtestvariable.newusr['fname'],
     'lname': IATtestvariable.newusr['lname'],
-    'role': IATtestvariable.newusr['role']
+    'role': IATtestvariable.newusr['role'],
+    'userid': IATtestvariable.newusr['userid']
 }
 
 if __name__ == '__main__':

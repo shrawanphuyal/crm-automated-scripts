@@ -4,7 +4,7 @@ import IATtestvariable
 user_details = {
     'email': IATtestvariable.superadmin['email'],
     'password': IATtestvariable.superadmin['password'],
-    'userid': '5'
+    'userid': IATtestvariable.newusr['userid']
 }
 
 if __name__ == '__main__':

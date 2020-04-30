@@ -1,7 +1,6 @@
 import requests
 import json
 import bs4
-import os
 import IATtestvariable
 
 
@@ -164,7 +163,8 @@ def margincal(margin):
         'merchant_name': margin['merchant'],
         'department_name': margin['department']
     }
-    margincal = requests.get(url=margin_url, data=data, headers=headers)
+    url = margin_url + '?' + 'merchant_name=' + str(data['merchant_name']) + '&' + 'department_name' + str(data['department_name'])
+    margincal = requests.get(url=url, headers=headers)
     print(margincal.text)
     return margin
 
@@ -229,4 +229,28 @@ def upload_file(file):
     upload_file = requests.post(url=file_upload_url, files=file1, headers=headers)
     print(upload_file.text)
     return file
+
+
+def user_delete(user_details):
+    r = requests.session()
+    delete_url = IATtestvariable.server_url
+    source = r.get(delete_url + 'admin/login/?next=/admin/')
+    csrf_token = bs4.BeautifulSoup(source.text, 'lxml').find('input', {'name': 'csrfmiddlewaretoken'})['value']
+    data = {
+               'csrfmiddlewaretoken': csrf_token,
+               'username': 'satkarph@gmail.com',
+               'password': 'nepal1234',
+               'next': '/admin/'
+    }
+    loginadmin = r.post(delete_url + 'admin/login/?next=/admin/', data)
+    user_delete_url = delete_url + '/admin/main/orlandouser/{0}/delete/'
+    sourceu = r.get(user_delete_url.format(user_details['user_id']))
+    csrf_token = bs4.BeautifulSoup(sourceu.text, 'lxml').find('input', {'name': 'csrfmiddlewaretoken'})['value']
+    data2 = {
+        'csrfmiddlewaretoken': csrf_token,
+        'post': 'yes'
+    }
+    r.post(url=user_delete_url.format(user_details['user_id']), data=data2)
+    return user_details
+
 
