@@ -254,3 +254,28 @@ def user_delete(user_details):
     return user_details
 
 
+def delivery_fund(delivery):
+    delivery_url = IATtestvariable.server_url + '/delivery-refund/'
+    headers = {
+        'Authorization': 'Bearer ' + delivery['access']
+    }
+    payload = {
+        'value': delivery['value'],
+        'order_id': delivery['order_id']
+    }
+    delivery_fund = requests.post(url=delivery_url, data=payload, headers=headers)
+    print(delivery_fund.text)
+    return delivery
+
+
+def check_refund(check):
+    check_url = IATtestvariable.server_url + '/check-refund/'
+    headers = {
+        'Authorization': 'Bearer ' + check['access']
+    }
+    check_refund = requests.get(url=check_url, headers=headers)
+    print(check_refund.text)
+    return check
+
+
+
