@@ -4,7 +4,7 @@ import IATtestvariable
 order = {
     'email': IATtestvariable.superadmin['email'],
     'password': IATtestvariable.superadmin['password'],
-    'id': IATtestvariable.order['id'],
+    'orderid': IATtestvariable.order['id'],
     'locked': IATtestvariable.order['locked']
 }
 

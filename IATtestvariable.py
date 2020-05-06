@@ -1,6 +1,7 @@
 # update variables  according to server
 server_url = 'http://3.89.232.237:8001'
 import random
+ran = random.randint(1, 100000000)
 import os
 # superadmin_creds
 superadmin = {
@@ -10,7 +11,7 @@ superadmin = {
 
 # user details
 newusr = {
-    'email': 'apitesting@pokemail.net',
+    'email': 'apitesting' + str(ran) +'@pokemail.net',
     'fname': 'Api',
     'lname': 'Testing',
     'password': 'Password+123',
