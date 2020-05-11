@@ -2,11 +2,12 @@ import requests
 import json
 import bs4
 import IATtestvariable
+import datetime
 
 
 def log(data):
     with open('output.txt', 'a', encoding='utf8') as f:
-        f.write(data + '\n')
+        f.write(datetime.datetime.utcnow().isoformat() +data + '\n')
 
 
 def login(user_details):
@@ -65,9 +66,9 @@ def updateuser(user_details):
     }
     data = {
         'email': user_details['uemail'],
-        'firstname': user_details['fname'],
-        'lastname': user_details['lname'],
-        'password': user_details['upassword'],
+        'first_name': user_details['fname'],
+        'last_name': user_details['lname'],
+        #'password': user_details['upassword'],
         'role': user_details['role']
     }
     updateuser = requests.put(url=updateuser_url.format(user_details['userid']), data=data, headers=headers)
@@ -97,8 +98,8 @@ def createuser(user_details):
     }
     data = {
         'email': user_details['uemail'],
-        'firstname': user_details['fname'],
-        'lastname': user_details['lname'],
+        'first_name': user_details['fname'],
+        'last_name': user_details['lname'],
         'password': user_details['upassword'],
         'role': user_details['role']
     }
@@ -255,23 +256,26 @@ def upload_file(file):
 def user_delete(user_details):
     r = requests.session()
     delete_url = IATtestvariable.server_url
-    source = r.get(delete_url + 'admin/login/?next=/admin/')
-    csrf_token = bs4.BeautifulSoup(source.text, 'lxml').find('input', {'name': 'csrfmiddlewaretoken'})['value']
+    source = r.get(delete_url + '/admin/login/?next=/admin/')
+    csrf_token = bs4.BeautifulSoup(source.text, 'html.parser').find('input', {'name': 'csrfmiddlewaretoken'})['value']
     data = {
                'csrfmiddlewaretoken': csrf_token,
                'username': 'satkarph@gmail.com',
                'password': 'nepal1234',
                'next': '/admin/'
     }
-    loginadmin = r.post(delete_url + 'admin/login/?next=/admin/', data)
-    user_delete_url = delete_url + '/admin/main/orlandouser/{0}/delete/'
-    sourceu = r.get(user_delete_url.format(user_details['user_id']))
+    loginadmin = r.post(delete_url + '/admin/login/?next=/admin/', data)
+
+    user_delete_url = delete_url + '/admin/main/crmuser/{0}/delete/'
+    sourceu = r.get(user_delete_url.format(user_details['userid']))
     csrf_token = bs4.BeautifulSoup(sourceu.text, 'lxml').find('input', {'name': 'csrfmiddlewaretoken'})['value']
     data2 = {
         'csrfmiddlewaretoken': csrf_token,
         'post': 'yes'
     }
-    r.post(url=user_delete_url.format(user_details['user_id']), data=data2)
+    user_delete =r.post(url=user_delete_url.format(user_details['userid']), data=data2)
+    if 'apitesting@pokemail.net' not in user_delete.text:
+        log('User apitesting@pokemail.net is deleted ')
     return user_details
 
 

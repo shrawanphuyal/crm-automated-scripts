@@ -5,7 +5,7 @@ user_details = {
     'email': IATtestvariable.superadmin['email'],
     'password': IATtestvariable.superadmin['password'],
     'uemail': IATtestvariable.newusr['email'],
-    'upassword': IATtestvariable.newusr['password'],
+    'upassword': IATtestvariable.newusr['newpass'],
     'fname': IATtestvariable.newusr['fname'],
     'lname': IATtestvariable.newusr['lname'],
     'role': IATtestvariable.newusr['role'],
@@ -24,7 +24,6 @@ user_details = {
     'orderid': IATtestvariable.order['id'],
     'locked': IATtestvariable.order['locked'],
     'redem_id': IATtestvariable.redemption['id'],
-    'userid': IATtestvariable.newusr['userid'],
     'file': IATtestvariable.file['name']
 }
 
@@ -47,5 +46,6 @@ if __name__ == '__main__':
     baseAPITester.redemption_detail(user_details)
     baseAPITester.update_refund(user_details)
     baseAPITester.margincal(user_details)
-    #baseAPITester.upload_file(user_details)
+    baseAPITester.user_delete(user_details)
+    print(user_details['userid'])
 
